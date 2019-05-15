@@ -1,0 +1,795 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="K-Mean Clustering with Microsoft Excell an K-NN with Python">
+      
+      
+        <link rel="canonical" href="https://github.com/araaacf/">
+      
+      
+        <meta name="author" content="Mutiara Cahyani Fajrin">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
+    
+    
+      
+        <title>K-Mean And K-NN</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/application.750b69bd.css">
+      
+        <link rel="stylesheet" href="assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+      <script src="assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "None", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#algoritma-k-means-dan-k-nn" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://github.com/araaacf" title="K-Mean And K-NN" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              K-Mean And K-NN
+            </span>
+            <span class="md-header-nav__topic">
+              Materi
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/araaacf/k-mean-dan-k-nn" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    araaacf/k-mean-and-k-nn
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="." title="Materi" class="md-tabs__link md-tabs__link--active">
+        Materi
+      </a>
+    
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://github.com/araaacf" title="K-Mean And K-NN" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    K-Mean And K-NN
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/araaacf/k-mean-dan-k-nn" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    araaacf/k-mean-and-k-nn
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Materi
+      </label>
+    
+    <a href="." title="Materi" class="md-nav__link md-nav__link--active">
+      Materi
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#algoritma-k-means" title="Algoritma K-Means" class="md-nav__link">
+    Algoritma K-Means
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apa-itu-k-means" title="Apa itu K-Means?" class="md-nav__link">
+    Apa itu K-Means?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#berikut-langkah-langkah-menghitung-k-means-pada-excel" title="Berikut langkah-langkah menghitung K-Means pada Excel" class="md-nav__link">
+    Berikut langkah-langkah menghitung K-Means pada Excel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#menghitung-jumlah-cluster" title="Menghitung jumlah cluster" class="md-nav__link">
+    Menghitung jumlah cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#menghitung-silhoutte" title="Menghitung Silhoutte" class="md-nav__link">
+    Menghitung Silhoutte
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hasil-implementasi-silhoutte-pada-excel" title="Hasil Implementasi Silhoutte Pada Excel" class="md-nav__link">
+    Hasil Implementasi Silhoutte Pada Excel
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algoritma-k-nn" title="Algoritma K-NN" class="md-nav__link">
+    Algoritma K-NN
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apa-itu-k-nn" title="Apa itu K-NN?" class="md-nav__link">
+    Apa itu K-NN?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#berikut-merupakan-langkah-langkah-dalam-menghitung-kkn-pada-excel" title="Berikut merupakan langkah-langkah dalam menghitung KKN pada Excel:" class="md-nav__link">
+    Berikut merupakan langkah-langkah dalam menghitung KKN pada Excel:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#berikut-merupakan-implementasian-dengan-menggunakan-program-python" title="Berikut merupakan implementasian dengan menggunakan program python" class="md-nav__link">
+    Berikut merupakan implementasian dengan menggunakan program python
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#algoritma-k-means" title="Algoritma K-Means" class="md-nav__link">
+    Algoritma K-Means
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apa-itu-k-means" title="Apa itu K-Means?" class="md-nav__link">
+    Apa itu K-Means?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#berikut-langkah-langkah-menghitung-k-means-pada-excel" title="Berikut langkah-langkah menghitung K-Means pada Excel" class="md-nav__link">
+    Berikut langkah-langkah menghitung K-Means pada Excel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#menghitung-jumlah-cluster" title="Menghitung jumlah cluster" class="md-nav__link">
+    Menghitung jumlah cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#menghitung-silhoutte" title="Menghitung Silhoutte" class="md-nav__link">
+    Menghitung Silhoutte
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hasil-implementasi-silhoutte-pada-excel" title="Hasil Implementasi Silhoutte Pada Excel" class="md-nav__link">
+    Hasil Implementasi Silhoutte Pada Excel
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algoritma-k-nn" title="Algoritma K-NN" class="md-nav__link">
+    Algoritma K-NN
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apa-itu-k-nn" title="Apa itu K-NN?" class="md-nav__link">
+    Apa itu K-NN?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#berikut-merupakan-langkah-langkah-dalam-menghitung-kkn-pada-excel" title="Berikut merupakan langkah-langkah dalam menghitung KKN pada Excel:" class="md-nav__link">
+    Berikut merupakan langkah-langkah dalam menghitung KKN pada Excel:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#berikut-merupakan-implementasian-dengan-menggunakan-program-python" title="Berikut merupakan implementasian dengan menggunakan program python" class="md-nav__link">
+    Berikut merupakan implementasian dengan menggunakan program python
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="algoritma-k-means-dan-k-nn">Algoritma K-Means dan K-NN<a class="headerlink" href="#algoritma-k-means-dan-k-nn" title="Permanent link">&para;</a></h1>
+<h2 id="algoritma-k-means">Algoritma K-Means<a class="headerlink" href="#algoritma-k-means" title="Permanent link">&para;</a></h2>
+<h4 id="apa-itu-k-means">Apa itu K-Means?<a class="headerlink" href="#apa-itu-k-means" title="Permanent link">&para;</a></h4>
+<p><strong>K-Means Clustering</strong> adalah suatu metode penganalisaan data atau metode Data Mining yang melakukan proses pemodelan tanpa supervisi (unsupervised) dan merupakan salah satu metode yang melakukan pengelompokan data dengan sistem partisi.</p>
+<p>Terdapat dua jenis data clustering yang sering dipergunakan dalam proses pengelompokan data yaitu <strong>Hierarchical</strong> dan <strong>Non-Hierarchical</strong>, dan <strong>K-Means</strong> merupakan salah satu metode data clustering non-hierarchical atau <strong>Partitional Clustering</strong>.</p>
+<p><img alt="Material for Mkdocs" src="assets/images/partitional-clustering.jpg" /></p>
+<p>Metode <strong>K-Means Clustering</strong> berusaha mengelompokkan data yang ada ke dalam beberapa kelompok, dimana data dalam satu kelompok mempunyai karakteristik yang sama satu sama lainnya dan mempunyai karakteristik yang berbeda dengan data yang ada di dalam kelompok yang lain.</p>
+<p><img alt="Material for Mkdocs" src="assets/images/hierarchical-clustering.jpg" /></p>
+<p>Dengan kata lain, metode <strong>K-Means Clustering</strong> bertujuan untuk meminimalisasikan <strong>objective function</strong> yang diset dalam proses clustering dengan cara <strong>meminimalkan variasi antar data yang ada di dalam suatu cluster dan memaksimalkan variasi dengan data yang ada di cluster lainnya</strong>.</p>
+<p><img alt="Material for Mkdocs" src="assets/images/contoh-cluster.jpg" /></p>
+<h3 id="berikut-langkah-langkah-menghitung-k-means-pada-excel"><strong>Berikut langkah-langkah menghitung K-Means</strong> pada Excel<a class="headerlink" href="#berikut-langkah-langkah-menghitung-k-means-pada-excel" title="Permanent link">&para;</a></h3>
+<p><img alt="Material for Mkdocs" src="E:/Aplikasi%20n%20Driver/mkdocs-material-master/docs/assets/images/Data.png" /></p>
+<p><strong>Langkah 1</strong> Menentukan secara acak K titik data sebagai pusat cluster yang disebut centroid. </p>
+<p><img alt="Material for Mkdocs" src="E:/Aplikasi%20n%20Driver/mkdocs-material-master/docs/assets/images/Cluster.png" /></p>
+<p>Disini saya menggunakan 3 centroid, yakni individu 2,3 dan 4.</p>
+<p><img alt="Material for Mkdocs" src="E:/Aplikasi%20n%20Driver/mkdocs-material-master/docs/assets/images/Individual.png" /></p>
+<p><strong>Langkah 2</strong> Menghitung  jarak  ke masing-masing pusat cluster (centroid). Penyelesaian menggunakan Microsoft Excel dengan rumus sebagai berikut:</p>
+<pre class="codehilite"><code>= SQRT((Ki - Xi)^2+(Kj – Xj)^2+.......+(Kn– Xn)^2)    </code></pre>
+
+<p>Keterangan:</p>
+<p>​   K= Cluster</p>
+<p>​   X= Objek</p>
+<p>Selanjutnya masukkan  anggota centroid tertentu yang  memiliki jarak terdekat dengan pusat cluster, jarak terdekat dipilih dari anggota centroid yang paling mendekati 0 karena jika nilai semakin mendekati 0 maka akan semakin mirip dengan pusat cluster (centroid). Lalu tandai masing-masing   yang masuk ke cluster tertentu seperti dalam tabel berikut:</p>
+<p><img alt="Material for Mkdocs" src="E:/Aplikasi%20n%20Driver/mkdocs-material-master/docs/assets/images/Centroid.png" /></p>
+<p>Sehingga, Kita dapatkan tiga cluster  dengan anggotanya pada individu: {1,2}, {4,5,6,} dan {3,7}</p>
+<p><strong>Langkah 3</strong> Kemudian menghitung  rata-rata dari anggota cluster. Penyelesaian menggunakan Microsoft Excel dengan rumus sebagai berikut:</p>
+<pre class="codehilite"><code>=1/n*SUM( Xi + Xj+........+     Xn)     </code></pre>
+
+<p>Keterangan:</p>
+<p>​       n = Jumlah anggota cluster</p>
+<p>​       X = Anggota cluster</p>
+<p>Sehingga didapatkan tabel rata-rata sebagai berikut:</p>
+<p><img alt="Material for Mkdocs" src="E:/Aplikasi%20n%20Driver/mkdocs-material-master/docs/assets/images/Rata-rata%20anggota%20classter.PNG" /></p>
+<p>Selanjutnya hasil perhitungan rata-rata tersebut dipergunakan untuk menghitung centroid baru, dengan penyelesaian menggunakan Microsoft Excel dengan rumus sebagai berikut:</p>
+<p><img alt="Material for Mkdocs" src="E:/Aplikasi%20n%20Driver/mkdocs-material-master/docs/assets/images/rata%20rata.png" /></p>
+<p>Keterangan:</p>
+<p><img alt="Material for Mkdocs" src="E:/Aplikasi%20n%20Driver/mkdocs-material-master/docs/assets/images/Keterangan%20rata%20rata.PNG" /></p>
+<p>Selanjutnya masukkan  anggota centroid tertentu yang  memiliki jarak terdekat dengan pusat cluster, jarak terdekat dipilih dari anggota centroid yang paling mendekati 0 karena jika nilai semakin mendekati 0 maka akan semakin mirip. Lalu tandai masing-masing   yang masuk ke cluster tertentu seperti dalam tabel berikut:</p>
+<p><img alt="Material for Mkdocs" src="E:/Aplikasi%20n%20Driver/mkdocs-material-master/docs/assets/images/Centroid%20baru.png" /></p>
+<p>Sehingga, Kita dapatkan tiga cluster  dengan anggotanya pada individu: {1,2}, {4,5,6,} dan {3,7}</p>
+<p><strong>Langkah 4</strong> Ulangai langkah 2 dan 3 sampai tidak ada  dari anggota setiap cluster berubah tempat kelompoknya. Dan dikarenakan dalam contoh ini mengahasilkan anggota cluster yang tidak berubah tempat kelompoknya maka tidak ada pengulangan untuk langkah 2 dan 3.</p>
+<h3 id="menghitung-jumlah-cluster"><strong>Menghitung jumlah cluster</strong><a class="headerlink" href="#menghitung-jumlah-cluster" title="Permanent link">&para;</a></h3>
+<p><img alt="Material for Mkdocs" src="E:/Aplikasi%20n%20Driver/mkdocs-material-master/docs/assets/images/Validity.png" /></p>
+<p>Keterangan:</p>
+<p>​           Jarak Intra cluster =  <img alt="1557908141191" src="C:\Users\Ara\AppData\Roaming\Typora\typora-user-images\1557908141191.png" /></p>
+<p>​           Jarak Inter-cluster = min  (zi –zj)2</p>
+<p>​           i=1,2,3…K-1</p>
+<p>​           J=i+1,…K</p>
+<p>Implementasi pada Microsoft Excel sebagai berikut:</p>
+<p><img alt="1557908178122" src="C:\Users\Ara\AppData\Roaming\Typora\typora-user-images\1557908178122.png" /></p>
+<h3 id="menghitung-silhoutte">Menghitung Silhoutte<a class="headerlink" href="#menghitung-silhoutte" title="Permanent link">&para;</a></h3>
+<p><strong>Langkah 1</strong> Hitung rata-rata jarak objek dengan semua objek lain yang berada di dalam satu cluster dengan persamaan:</p>
+<p><img alt="1557908240258" src="C:\Users\Ara\AppData\Roaming\Typora\typora-user-images\1557908240258.png" /></p>
+<p>Dengan penyelesaian menggunakan Microsoft Excel dengan rumus sebagai berikut:</p>
+<pre class="codehilite"><code> = SQRT((Xi – Xj  – Xk^2))</code></pre>
+
+<p>Keterangan:</p>
+<p>X = Objek</p>
+<p><strong>Langkah 2</strong> Hitung rata-rata jarak objek dengan semua objek lain yang berada pada cluster lain, dengan persamaan :</p>
+<p><img alt="1557908433613" src="C:\Users\Ara\AppData\Roaming\Typora\typora-user-images\1557908433613.png" /></p>
+<p>Penyelesaian menghitung jarak menggunakan Microsoft Excel dengan rumus sebagai berikut:</p>
+<pre class="codehilite"><code>= SQRT((Ki - Xi)^2+(Kj – Xj)^2+.......+(Kn– Xn)^2)      </code></pre>
+
+<p>Keterangan:</p>
+<p>​           K = Anggota Cluster</p>
+<p>​           X = Objek</p>
+<p><strong>Langkah 3</strong> Selanjutnya menghitung rata-rata jarak menggunakan Microsoft Excel dengan rumus sebagai berikut:</p>
+<pre class="codehilite"><code>=1/n*SUM( Di + Dj+........+     Dn)    </code></pre>
+
+<p>Keterangan:</p>
+<p>​           D = Jarak</p>
+<p>​           n = Banyaknya jarak</p>
+<p><strong>Langkah 4</strong> Setelah nilai untuk mendapat nilai bi  maka cari nilai rata-rata antar cluster yang paling minimum. Hitung nilai silhouette coefficient, dengan penyelesaian menggunakan Microsoft Excel dengan rumus sebagai berikut:</p>
+<pre class="codehilite"><code>Si = 1- (ai /bi)</code></pre>
+
+<h3 id="hasil-implementasi-silhoutte-pada-excel"><strong>Hasil Implementasi Silhoutte Pada Excel</strong><a class="headerlink" href="#hasil-implementasi-silhoutte-pada-excel" title="Permanent link">&para;</a></h3>
+<p><strong>Shilhoutte Cluster 1</strong></p>
+<p><img alt="Material for Mkdocs" src="E:/Aplikasi%20n%20Driver/mkdocs-material-master/docs/assets/images/Shilhoutte%20cluster%201.png" /></p>
+<p>Hasil nilai silhouette coefficient adalah <strong>mendekati 1 maka pengelompokan data didalam cluster 1 bersifat baik.</strong></p>
+<p><strong>Shilhoutte Cluster 2</strong></p>
+<p><img alt="Material for Mkdocs" src="E:/Aplikasi%20n%20Driver/mkdocs-material-master/docs/assets/images/Shilhoutte%20cluster%202.png" /></p>
+<p>Hasil nilai silhouette coefficient <strong>adalah mendekati -1 maka pengelompokan data didalam cluster 1 bersifat kurang baik.</strong></p>
+<p><strong>Shilhoutte Cluster 3</strong></p>
+<p><img alt="Material for Mkdocs" src="E:/Aplikasi%20n%20Driver/mkdocs-material-master/docs/assets/images/Shilhoutte%20cluster%203.png" /></p>
+<p>Hasil nilai silhouette coefficient adalah <strong>mendekati -1 maka pengelompokan data didalam cluster 1 bersifat kurang baik.</strong></p>
+<h2 id="algoritma-k-nn"><strong>Algoritma K-NN</strong><a class="headerlink" href="#algoritma-k-nn" title="Permanent link">&para;</a></h2>
+<h3 id="apa-itu-k-nn"><strong>Apa itu K-NN?</strong><a class="headerlink" href="#apa-itu-k-nn" title="Permanent link">&para;</a></h3>
+<p><strong>Algoritma K-Nearest Neighbor (K-NN)</strong> adalah sebuah metode klasifikasi terhadap sekumpulan data berdasarkan pembelajaran  data yang sudah terklasifikasikan sebelumya. Termasuk dalam <strong>supervised learning</strong>, dimana hasil query instance yang baru diklasifikasikan berdasarkan mayoritas kedekatan jarak dari kategori yang ada dalam <strong>K-NN</strong>.</p>
+<p>Kedekatan dapat dianggap sebagai invers jarak, alias berbanding terbalik dengan jarak. Semakin kecil jarak antara dua instance, semakin besar “kedekatan” antara dua instance tersebut. Dengan demikian, k nearest neighbours dari sebuah instance x didefinisikan sebagai k instance yang memiliki jarak terkecil (kedekatan terbesar, nearest) dengan x.</p>
+<h3 id="berikut-merupakan-langkah-langkah-dalam-menghitung-kkn-pada-excel">Berikut merupakan langkah-langkah dalam menghitung KKN pada Excel:<a class="headerlink" href="#berikut-merupakan-langkah-langkah-dalam-menghitung-kkn-pada-excel" title="Permanent link">&para;</a></h3>
+<p><strong>Langkah 1</strong> Dari data keseluruhan ambilah data testing, yakni dalam contoh ini dari 150 data diambil 15 data testing. Pisahkan data testing dan data hasil pengurangan masing-masing 15 dan 135 data. Berikut adalah data testing yang diambil:</p>
+<p><img alt="Material for Mkdocs" src="assets\images\k1.png" /></p>
+<p><strong>Langkah 2</strong> Menghitung jarak pada 15 data testing terhadap 135 data dari hasil pengurangan sebagai berikut:</p>
+<h3 id="_1"><img alt="Material for Mkdocs" src="assets\images\d.png" /><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>Dan penyelesaian menghitung jarak menggunakan Microsoft Excel menggunakan rumus sebagai berikut:</p>
+<pre class="codehilite"><code>=SQRT (POWER(x2 –x1)^2+(y2 – y1)^2+.......+(Zn – Zn))</code></pre>
+
+<p>Implementasi :</p>
+<p><img alt="Material for Mkdocs" src="assets\images\k2.png" /></p>
+<p><img alt="Material for Mkdocs" src="assets\images\k3.png" /></p>
+<p><strong>Langkah 3</strong> Urutkan masing-masing jarak tersebut dari yang terkecil ke yang terbesar. </p>
+<p><img alt="Material for Mkdocs" src="assets\images\k6 (1).png" /></p>
+<p><strong>Langkah 4</strong> Setelah itu tentukan nilai k sebanyak data sisa hasil pengurangan yakni 135 data.  Dengan menggunakan kategori nearest neighbor yaitu dengan melihat dari class yang paling mayoritas, maka dapat diprediksikan class pada objek tersebut. Seperti berikut ini:</p>
+<p><img alt="Material for Mkdocs" src="assets\images\k6 (2).png" /></p>
+<p>Misalnya, dengan menggunakan sampel data tersebut kita menentukan K=2 maka hasil cluster pada objek pengurutan adalah iris-setosa karena mayoritas class pada K tersebut adalah iris-setosa.</p>
+<p><img alt="Material for Mkdocs" src="assets\images\k5.png" /></p>
+<h3 id="berikut-merupakan-implementasian-dengan-menggunakan-program-python"><strong>Berikut merupakan implementasian dengan menggunakan program python</strong><a class="headerlink" href="#berikut-merupakan-implementasian-dengan-menggunakan-program-python" title="Permanent link">&para;</a></h3>
+<p>Setelah memahami langkah-langkah perhitungan KNN pada excel, maka kita akan mengggunakan program python dengan library pandas dan scikit-learn untuk perhitungan KNN.  Library pandas berfungsi untuk memanggil data sedangkan scikit-learn digunakan untuk memanggil rumus KNN pada library. Berikut merupakan source program pada command prompt:</p>
+<pre class="codehilite"><code>pip install pandas
+pip install sklearn</code></pre>
+
+<p>Langkah-langkah pada program ini berbeda dengan Microsof Excel. Jika dalam Microsoft Excel kita langsung memasukkan rumus dengan cara manual, dengan program ini kita hanya memanggil rumus dari library dan menginputkan data baru untuk melihat nilai class dari data baru tersebut. Berikut langkah-langkahnya:</p>
+<p><strong>Langkah 1</strong> pada data yang sama seperti diatas,  saya membuat source program seperti berikut ini:</p>
+<pre class="codehilite"><code>import pandas as pd 
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn import model_selection
+from sklearn.model_selection import train_test_split
+
+#memuat file csv
+df=pd.read_csv('Iris.csv')
+
+
+
+#Inisialisasi KNN
+clf=KNeighborsClassifier(n_neighbors=3)
+
+
+
+# Dataset validasi dataset
+array = df.values
+X = array[:,1:5]
+Y = array[:,5]
+
+# Sepertiga data sebagai bagian dari set tes
+validation_size = 15
+
+seed = 7
+X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y, test_size=validation_size, random_state=seed)
+
+#Menyesuaikan set training
+clf.fit(X_train, Y_train) 
+
+#Predicting untuk Set Tes
+pred_clf = clf.predict(X_validation)
+
+
+#Buat file prediksi dengan gabungan data asli dan prediksi
+#Membentuk kembali diperlukan untuk melakukan penggabungan
+pred_clf_df = pd.DataFrame(pred_clf.reshape(15,1))
+
+#Ganti nama kolom untuk menunjukkan prediksi
+pred_clf_df.rename(columns={0:'Prediction'}, inplace=True)
+
+#membentuk kembali dataset uji
+X_validation_df = pd.DataFrame(X_validation.reshape(15 ,4))
+
+#menggabungkan dua bingkai data panda di atas kolom untuk membuat dataset prediksi
+pred_outcome = pd.concat([X_validation_df, pred_clf_df], axis=1, join_axes=[X_validation_df.index])
+
+pred_outcome.rename(columns = {0:'SepalLengthCm', 1:'SepalWidthCm', 2:'PetalLengthCm', 3:'PetalWidthCm'}, inplace=True)
+
+del df['Id']
+
+#menggabungkan prediksi dengan dataset asli
+pred_comp = pd.merge(df,pred_outcome, on=['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm'])
+
+#cetak 10 baris prediksi akhir
+print((pred_comp).head(15))
+print ("\n")
+
+# make prediction
+sl = float(input('Enter sepal length (cm): '))
+sw = float(input('Enter sepal width (cm): '))
+tl = float(input('Enter tepal length (cm): '))
+tw = float(input('Enter tepal width (cm): '))
+dataClass = clf.predict([[sl,sw,tl,tw]])
+print ("\n")
+print('Prediction: ', dataClass)
+print ("\n")</code></pre>
+
+<p><strong>Langkah 2</strong> Run program tersebut sehingga mendapat hasil program berikut:</p>
+<pre class="codehilite"><code>   SepalLengthCm SepalWidthCm  ...          Species       Prediction
+0            4.8          3.4  ...      Iris-setosa      Iris-setosa
+1            5.2          3.4  ...      Iris-setosa      Iris-setosa
+2            5.2          4.1  ...      Iris-setosa      Iris-setosa
+3              5          3.5  ...      Iris-setosa      Iris-setosa
+4            4.5          2.3  ...      Iris-setosa      Iris-setosa
+5            6.4          3.2  ...  Iris-versicolor  Iris-versicolor
+6            6.9          3.1  ...  Iris-versicolor  Iris-versicolor
+7            5.6            3  ...  Iris-versicolor  Iris-versicolor
+8            6.7            3  ...  Iris-versicolor  Iris-versicolor
+9            5.4            3  ...  Iris-versicolor  Iris-versicolor
+10             6          3.4  ...  Iris-versicolor  Iris-versicolor
+11           5.6          2.7  ...  Iris-versicolor  Iris-versicolor
+12           4.9          2.5  ...   Iris-virginica  Iris-versicolor
+13           7.2          3.6  ...   Iris-virginica   Iris-virginica
+14           5.9            3  ...   Iris-virginica   Iris-virginica
+
+[15 rows x 6 columns]
+
+
+Enter sepal length (cm): </code></pre>
+
+<p><strong>Langkah 3</strong> Inputkan data baru, sehingga mendapatkan hasil prediksi class seperti berikut ini:</p>
+<pre class="codehilite"><code>Enter sepal length (cm): 2
+Enter sepal width (cm): 3
+Enter petal length (cm): 4
+Enter petal width (cm): 5
+
+
+Prediction:  ['Iris-virginica']</code></pre>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2016 - 2019 araaacf
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.css">
+    
+      <a href="https://webMutiara.000webhostapp.com/" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/araaacf" class="md-footer-social__link fa fa-github-alt"></a>
+    
+      <a href="https://instagram.com/araaacf" class="md-footer-social__link fa fa-instagram"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/application.8c0d971c.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
+      
+    
+  </body>
+</html>
